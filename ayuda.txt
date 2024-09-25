@@ -1,0 +1,89 @@
+url de configuracion:https://www.youtube.com/watch?v=B6FZgbhuX94
+step 1:Install cypress-cucumber-preprocesr
+npm install --save-dev cypress-cucumber-preprocessor
+step 2:ingresar en cypress.config.js file
+
+Step 1: Install cypress-cucumber-preprocessor
+npm install --save-dev cypress-cucumber-preprocessor
+
+Step2: Need to add below code in cypress.config.js file
+const cucumber = require('cypress-cucumber-preprocessor').default
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      // implement node event listeners here
+      on('file:preprocessor', cucumber())
+    },
+    specPattern: "cypress/e2e/Features/*.feature",
+  },
+});
+
+Step 3:Need to add below code in package.js file after the devDependencies section
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinations": true,
+    "stepDefinitions": "cypress/e2e/PageObjects/"
+  }
+
+Step 4: Create "Test.feature" file under e2e/Features and paste below code
+Feature: Feature Name
+
+    @TagName
+    Scenario: Scenario Name
+        Given Home page is opened
+
+Step 5: Create "Test_StepDef.js" file under e2e/PageObjects
+import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
+
+Given('Home page is opened', function() {
+    cy.visit("https://www.saucedemo.com/")
+    cy.wait(7000)
+})
+Reporte
+Paso 1: confirgurar el package.json:
+"cypress-cucumber-preprocessor": {
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
+  }
+Paso 2 se crear la caperta manualmente en cypress/cucumber-json
+step3: Para generar el .json de la carpeta: cucumber-json se corre el comando, pero
+anteste se agrega en el package.json lo siguiente:"scripts": {
+                                                      "generate-json": "cypress run --env cucumberJson=true"
+                                                    }
+Luego corre el comando npm run generate-json
+
+Paso 4 luego crear el archivo en cypress/cucumberReport y adicionar lo siguiente:
+const report = require("multiple-cucumber-html-reporter");
+
+report.generate({
+  jsonDir: "./path-to-your-json-output/",
+  reportPath: "./path-where-the-report-needs-to-be/",
+  metadata: {
+    browser: {
+      name: "chrome",
+      version: "60",
+    },
+    device: "Local test machine",
+    platform: {
+      name: "ubuntu",
+      version: "16.04",
+    },
+  },
+  customData: {
+    title: "Run info",
+    data: [
+      { label: "Project", value: "Custom project" },
+      { label: "Release", value: "1.2.3" },
+      { label: "Cycle", value: "B11221.34321" },
+      { label: "Execution Start Time", value: "Nov 19th 2017, 02:31 PM EST" },
+      { label: "Execution End Time", value: "Nov 19th 2017, 02:56 PM EST" },
+    ],
+  },
+});
+nota: Se configura la la rutas de ubicacion del reporte y demas elementos del reporte
+Paso 5:Para que se gener el cucumber Report, da la ruta donde se genera el reporte
+node .\cypress\cucumberReport.js
