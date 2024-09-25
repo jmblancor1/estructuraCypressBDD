@@ -1,0 +1,62 @@
+[
+  {
+    "keyword": "Feature",
+    "name": "Pruebas de Login",
+    "line": 1,
+    "id": "pruebas-de-login",
+    "tags": [],
+    "uri": "CrearEmpleado.feature",
+    "elements": [
+      {
+        "id": "pruebas-de-login;login-exitoso",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Login exitoso",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "El usuario se autentica con usuario \"Admin\" y password \"admin123\"",
+            "result": {
+              "status": "passed",
+              "duration": 5303000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 7,
+            "name": "El usuario va a la opcion pip y da click en add para agregar empleado",
+            "result": {
+              "status": "passed",
+              "duration": 3157000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "El usuario llena los campos de agregar usuario",
+            "result": {
+              "status": "passed",
+              "duration": 3058000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "El usuario realiza una búsqueda del nuevo empleado",
+            "result": {
+              "status": "passed",
+              "duration": 1924000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
